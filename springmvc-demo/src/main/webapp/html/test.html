@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    var a = true, b = 'true', c = 1, d = "1", e = "";
+    console.log(a == b);
+    console.log(c == d);
+    if (e) {
+        console.log("aaa");
+    }
+    if (! e) {
+        console.log("bbb")
+    }
+
+
+    function test(callback, arg1, arg2) {
+        alert("aaa")
+        callback(arg1, arg2);
+    }
+
+    function test1(t) {
+        alert(t);
+    }
+
+    test(test1, 11, 22);
+</script>
+</body>
+</html>
