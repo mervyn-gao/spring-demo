@@ -32,4 +32,9 @@ public class CityServiceImpl implements CityService {
         List<City> cities = cityMapper.selectByExample(example);
         return new PageInfo<>(cities);
     }
+
+    @Override
+    public List<City> listByName(String name) {
+        return cityMapper.listByName(name);
+    }
 }

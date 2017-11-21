@@ -6,6 +6,8 @@ import com.springmvc.demo.mapper.CityMapper;
 import com.springmvc.demo.model.City;
 import org.hibernate.validator.constraints.Email;
 
+import java.util.List;
+
 /**
  * Created by mengran.gao on 2017/8/25.
  */
@@ -15,4 +17,6 @@ public interface CityService {
     City get(int id);
 
     PageInfo<City> page(int page, int size);
+
+    List<City> listByName(String name);
 }

@@ -25,4 +25,6 @@ public interface CityMapper {
     int updateByPrimaryKey(City record);
 
     City selectById(@Param("id") int id);
+
+    List<City> listByName(String name);
 }

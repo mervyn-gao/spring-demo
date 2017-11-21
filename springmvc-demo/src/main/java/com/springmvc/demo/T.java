@@ -1,14 +1,10 @@
 package com.springmvc.demo;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
+import com.springmvc.demo.model.User;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -46,5 +42,22 @@ public class T {
         File file = FileUtils.toFile(url);
 
         FileUtils.copyURLToFile(url, file);*/
+
+        List<User> users = new ArrayList<>(5);
+        User u1 = new User("yiyi", 10, "yiyi@qq.com", new Date());
+        User u2 = new User("erer", 20, "erer@qq.com", new Date());
+        User u3 = new User("sasa", 30, "sasa@qq.com", new Date());
+        User u4 = new User("sisi", 40, "sisi@qq.com", new Date());
+        User u42 = new User("sisi", 40, "sisi@qq.com", new Date());
+        User u5 = new User("erer", 50, "erer@qq.com", new Date());
+        users.add(u1);
+        users.add(u2);
+        users.add(u3);
+        users.add(u4);
+        users.add(u42);
+        users.add(u5);
+        System.out.println(users);
+        users.remove(u4);
+        System.out.println(users);
     }
 }

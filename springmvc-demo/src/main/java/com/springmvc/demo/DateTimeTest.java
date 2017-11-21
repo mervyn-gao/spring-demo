@@ -54,7 +54,6 @@ public class DateTimeTest {
     }
 
     private static void localDateTimeTest() {
-
         //Current Date
         LocalDateTime today = LocalDateTime.now();
         System.out.println("当前日期时间 DateTime=" + today);

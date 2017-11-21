@@ -1,22 +1,19 @@
 package com.springmvc.demo.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.springmvc.demo.constant.ResultCodeConstant;
-import com.springmvc.demo.enums.ResultStateEnum;
 import com.springmvc.demo.model.User;
 import com.springmvc.demo.service.UserService;
 import com.springmvc.demo.view.UserExcelView;
-import com.springmvc.demo.vo.JsonResult;
+import com.springmvc.demo.vo.BusinessStatus;
+import com.springmvc.demo.vo.Result;
 import com.springmvc.demo.vo.UserAddValidGroup;
 import com.springmvc.demo.vo.UserVo;
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -54,29 +50,29 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 //    @ResponseBody
-    public JsonResult<UserVo> add(@Validated({UserAddValidGroup.class}) @RequestBody UserVo userVo, BindingResult result) {
+    public Result<UserVo> add(@Validated({UserAddValidGroup.class}) @RequestBody UserVo userVo, BindingResult result) {
         LOGGER.debug("debug日志，userVo={}", JSON.toJSONString(userVo));
         LOGGER.info("info日志，userVo={}", JSON.toJSONString(userVo));
         if (result.hasErrors()) {
             String message = result.getFieldError().getDefaultMessage();
-            return new JsonResult<>(ResultCodeConstant.VALID_ERROR, message);
+            return Result.failure(BusinessStatus.CHECK_ERROR.getCode(), message);
         }
-        return JsonResult.success(ResultStateEnum.SUCCESS, userVo);
+        return Result.success();
     }
 
     @RequestMapping(value = "/importUsers", method = {RequestMethod.POST})
 //    @ResponseBody
-    public JsonResult<String> importUsers(@RequestParam("file") MultipartFile file) throws Exception {
+    public Result<String> importUsers(@RequestParam("file") MultipartFile file) throws Exception {
         if (null == file) {
-            JsonResult.fail(ResultStateEnum.INNER_ERROR);
+            return Result.failure(BusinessStatus.CHECK_ERROR.getCode(), "导入文件不能为空");
         }
         String originalFilename = file.getOriginalFilename();
         String fileNameExt = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
         if (!"xls".equals(fileNameExt) && !"xlsx".equals(fileNameExt)) {
-            JsonResult.fail(ResultStateEnum.INNER_ERROR);
+            return Result.failure(BusinessStatus.CHECK_ERROR.getCode(), "文件格式不正确");
         }
         userService.importWorkers(file.getInputStream());
-        return JsonResult.success(ResultStateEnum.SUCCESS, null);
+        return Result.success("导入成功");
     }
 
     @RequestMapping(value = "/exportUsers", method = RequestMethod.GET)

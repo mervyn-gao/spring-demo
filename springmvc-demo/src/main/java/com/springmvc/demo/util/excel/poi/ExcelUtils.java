@@ -16,7 +16,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class ExcelUtil {
+public class ExcelUtils {
     /**
      * 导出Excel（可以导出到本地文件系统，也可以导出到浏览器，可自定义工作表大小）
      *
@@ -377,21 +377,11 @@ public class ExcelUtil {
             cnFields[count] = entry.getValue();
             count++;
         }
-        //填充标题
-        /*Row firstRow = sheet.createRow(0);
-        CellStyle titleCellStyle = makeStyle(sheet.getWorkbook(), 1);
-        for (int i = 0; i < cnFields.length; i++) {
-            Cell cell = firstRow.createCell(i);
-        }
-        region(sheet, 0, 0, 0, fieldMap.size() - 1);
-        Cell titleCell = firstRow.getCell(0);
-        titleCell.setCellValue(title);
-        titleCell.setCellStyle(titleCellStyle);*/
         //填充表头
-        Row secondRow = sheet.createRow(0);
+        Row firstRow = sheet.createRow(0);
         CellStyle titleCellStyle = makeStyle(sheet.getWorkbook(), 2);
         for (int i = 0; i < cnFields.length; i++) {
-            Cell cell = secondRow.createCell(i);
+            Cell cell = firstRow.createCell(i);
             cell.setCellValue(cnFields[i]);
             cell.setCellStyle(titleCellStyle);
         }
@@ -448,18 +438,8 @@ public class ExcelUtil {
         // style.setBorderBottom(CellStyle.BORDER_THIN);
         // style.setBorderLeft(CellStyle.BORDER_THIN);
         Font font = workbook.createFont();// 文字样式
-        if (type == 1) {
-            // style.setFillForegroundColor(HSSFColor.LIGHT_BLUE.index);//颜色样式
-            // 前景颜色
-            // style.setFillBackgroundColor(HSSFColor.LIGHT_BLUE.index);//背景色
-            // style.setFillPattern(CellStyle.ALIGN_FILL);// 填充方式
-            font.setBold(true);
-            font.setFontHeight((short) 300);
-        }
-        if (type == 2) {
-            font.setBold(true);
-            font.setFontHeight((short) 200);
-        }
+        font.setBold(true);
+        font.setFontHeight((short) 200);
         style.setFont(font);
         return style;
     }

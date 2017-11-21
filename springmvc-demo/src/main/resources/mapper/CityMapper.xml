@@ -174,4 +174,7 @@
     <select id="selectById" resultMap="BaseResultMap">
       select * from city where id = #{id}
     </select>
+    <select id="listByName" resultType="com.springmvc.demo.model.City">
+        select * from city where name = #{name}
+    </select>
 </mapper>

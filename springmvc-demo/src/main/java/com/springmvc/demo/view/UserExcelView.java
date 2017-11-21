@@ -1,6 +1,6 @@
 package com.springmvc.demo.view;
 
-import com.springmvc.demo.util.excel.poi.ExcelUtil;
+import com.springmvc.demo.util.excel.poi.ExcelUtils;
 import com.springmvc.demo.util.excel.poi.User;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.web.servlet.view.document.AbstractXlsxView;
@@ -23,6 +23,6 @@ public class UserExcelView extends AbstractXlsxView {
         fieldMap.put("age", "年龄");
         fieldMap.put("email", "邮箱");
         fieldMap.put("birthday", "出生日期");
-        ExcelUtil.listToExcel(workbook, userList, fieldMap,"三工人员信息", "三工人员信息.xlsx", response);
+        ExcelUtils.listToExcel(workbook, userList, fieldMap,"三工人员信息", "三工人员信息.xlsx", response);
     }
 }
