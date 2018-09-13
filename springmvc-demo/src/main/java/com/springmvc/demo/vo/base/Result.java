@@ -1,4 +1,4 @@
-package com.springmvc.demo.vo;
+package com.springmvc.demo.vo.base;
 
 import org.springframework.http.HttpStatus;
 
@@ -67,10 +67,6 @@ public class Result<T> implements Serializable {
 
     public static <T> Result<T> success(T data, String message) {
         return new Result<>(data, HttpStatus.OK.value(), message);
-    }
-
-    public static <T> Result<T> failure(BusinessStatus businessStatus) {
-        return new Result<>(businessStatus.getCode(), businessStatus.getMessage());
     }
 
     public static <T> Result<T> failure(int code, String message) {

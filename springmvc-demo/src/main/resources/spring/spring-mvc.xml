@@ -3,15 +3,14 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+        http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <mvc:annotation-driven conversion-service="conversionService">
+    <mvc:annotation-driven conversion-service="conversionService" validator="validator">
         <mvc:message-converters>
             <!--<ref bean="fastJsonHttpMessageConverter"/>-->
             <ref bean="mappingJackson2HttpMessageConverter"/>
@@ -21,9 +20,11 @@
 
     <mvc:default-servlet-handler/>
 
-    <context:component-scan base-package="com.springmvc.demo.controller"/>
+    <context:component-scan base-package="com.springmvc.demo">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
 
-    <bean id="fastJsonHttpMessageConverter"
+    <!--<bean id="fastJsonHttpMessageConverter"
           class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
         <property name="supportedMediaTypes">
             <list>
@@ -33,28 +34,45 @@
         </property>
         <property name="features">
             <list>
-                <value>QuoteFieldNames</value> <!-- 输出key时是否使用双引号,默认为true -->
-                <value>WriteMapNullValue</value>  <!-- 是否输出值为null的字段,默认为false -->
+                <value>QuoteFieldNames</value> &lt;!&ndash; 输出key时是否使用双引号,默认为true &ndash;&gt;
+                <value>WriteMapNullValue</value>  &lt;!&ndash; 是否输出值为null的字段,默认为false &ndash;&gt;
                 <value>WriteDateUseDateFormat</value>
-                <!--
+                &lt;!&ndash;
                 <value>DisableCircularReferenceDetect</value>
                 <value>WriteNullStringAsEmpty</value>  字符类型字段如果为null,输出为"",而非null
                 <value>WriteNullNumberAsZero</value>  数值字段如果为null,输出为0,而非null
                 <value>WriteNullBooleanAsFalse</value>  Boolean字段如果为null,输出为false,而非null
                 <value>WriteNullListAsEmpty</value>    List字段如果为null,输出为[],而非null
-                -->
+                &ndash;&gt;
             </list>
         </property>
-    </bean>
+    </bean>-->
 
     <bean id="mappingJackson2HttpMessageConverter"
           class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
         <property name="supportedMediaTypes">
             <list>
                 <value>text/html;charset=UTF-8</value>
+                <value>text/plain;charset=UTF-8</value>
                 <value>text/json;charset=UTF-8</value>
                 <value>application/json;charset=UTF-8</value>
             </list>
+        </property>
+        <property name="objectMapper">
+            <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+                <property name="dateFormat">
+                    <bean class="com.springmvc.demo.converter.JsonDateConverter" />
+                </property>
+                <!--<property name="dateFormat">
+                    <bean class="java.text.SimpleDateFormat">
+                        <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss" />
+                    </bean>
+                </property>
+                <property name="timeZone" value="GMT+8" />-->
+                <property name="serializationInclusion">
+                    <value type="com.fasterxml.jackson.annotation.JsonInclude.Include">NON_NULL</value>
+                </property>
+            </bean>
         </property>
     </bean>
 
@@ -63,19 +81,40 @@
     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="converters">
             <set>
-                <bean class="com.springmvc.demo.converter.DateConverter"></bean>
+                <bean class="com.springmvc.demo.converter.DateConverter"/>
             </set>
         </property>
     </bean>
 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/pages"/>
+        <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
     </bean>
 
     <bean name="multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="defaultEncoding" value="UTF-8"></property>
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+
+    <!--注：这里不要使用ReloadableResourceBundleMessageSource，经测试发现不管用-->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>i18n/messages</value>
+                <value>i18n/errors</value>
+            </list>
+        </property>
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="cacheSeconds" value="60"/>
+    </bean>
+
+    <!-- 校验器 -->
+    <bean id="validator"
+          class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <!-- 校验器 -->
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+        <!-- 指定校验使用的资源文件，如果不指定则默认使用classpath下的ValidationMessages.properties -->
+        <property name="validationMessageSource" ref="messageSource"/>
     </bean>
 </beans>

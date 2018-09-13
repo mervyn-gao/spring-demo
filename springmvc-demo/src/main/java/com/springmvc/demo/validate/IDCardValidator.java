@@ -1,5 +1,7 @@
 package com.springmvc.demo.validate;
 
+import org.springframework.util.StringUtils;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.regex.Pattern;
@@ -8,13 +10,15 @@ import java.util.regex.Pattern;
  * Created by mengran.gao on 2017/8/8.
  */
 public class IDCardValidator implements ConstraintValidator<IDCard, String> {
+
+    // 一般这里是拿到注解里的属性值
     @Override
     public void initialize(IDCard constraintAnnotation) {
-
     }
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
+        if (StringUtils.isEmpty(value)) return true;//为空不校验
         //15位和18位身份证号码的正则表达式
         String patternStr = "(^[1-9]\\d{7}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}$)|(^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])((\\d{4})|\\d{3}[Xx])$)";
         Pattern pattern = Pattern.compile(patternStr);
@@ -32,24 +36,15 @@ public class IDCardValidator implements ConstraintValidator<IDCard, String> {
             for (int i = 0; i < 17; i++) {
                 idCardWiSum += Integer.valueOf(value.substring(i, i + 1)) * idCardWi[i];
             }
-
             int idCardMod = idCardWiSum % 11;//计算出校验码所在数组的位置
             String idCardLast = value.substring(17);//得到最后一位身份证号码
 
             //如果等于2，则说明校验码是10，身份证号码最后一位应该是X
             if (idCardMod == 2) {
-                if (idCardLast == "X" || idCardLast == "x") {
-                    return true;
-                } else {
-                    return false;
-                }
+                return "X".equals(idCardLast) || "x".equals(idCardLast);
             } else {
                 //用计算出的验证码与最后一位身份证号码匹配，如果一致，说明通过，否则是无效的身份证号码
-                if (Integer.valueOf(idCardLast) == idCardY[idCardMod]) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return Integer.valueOf(idCardLast).equals(idCardY[idCardMod]);
             }
         }
         return false;

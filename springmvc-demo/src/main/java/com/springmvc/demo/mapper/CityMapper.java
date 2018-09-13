@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface CityMapper {
+    int deleteByExample(CityExample example);
+
     int deleteByPrimaryKey(Long id);
 
     int insert(City record);
@@ -23,8 +25,4 @@ public interface CityMapper {
     int updateByPrimaryKeySelective(City record);
 
     int updateByPrimaryKey(City record);
-
-    City selectById(@Param("id") int id);
-
-    List<City> listByName(String name);
 }

@@ -1,5 +1,6 @@
 package com.springmvc.demo.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -301,6 +302,136 @@ public class CityExample {
 
         public Criteria andStateNotBetween(String value1, String value2) {
             addCriterion("state not between", value1, value2, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalIsNull() {
+            addCriterion("sal is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalIsNotNull() {
+            addCriterion("sal is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalEqualTo(BigDecimal value) {
+            addCriterion("sal =", value, "sal");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalNotEqualTo(BigDecimal value) {
+            addCriterion("sal <>", value, "sal");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalGreaterThan(BigDecimal value) {
+            addCriterion("sal >", value, "sal");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("sal >=", value, "sal");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalLessThan(BigDecimal value) {
+            addCriterion("sal <", value, "sal");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("sal <=", value, "sal");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalIn(List<BigDecimal> values) {
+            addCriterion("sal in", values, "sal");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalNotIn(List<BigDecimal> values) {
+            addCriterion("sal not in", values, "sal");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("sal between", value1, value2, "sal");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("sal not between", value1, value2, "sal");
+            return (Criteria) this;
+        }
+
+        public Criteria andSexIsNull() {
+            addCriterion("sex is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSexIsNotNull() {
+            addCriterion("sex is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSexEqualTo(String value) {
+            addCriterion("sex =", value, "sex");
+            return (Criteria) this;
+        }
+
+        public Criteria andSexNotEqualTo(String value) {
+            addCriterion("sex <>", value, "sex");
+            return (Criteria) this;
+        }
+
+        public Criteria andSexGreaterThan(String value) {
+            addCriterion("sex >", value, "sex");
+            return (Criteria) this;
+        }
+
+        public Criteria andSexGreaterThanOrEqualTo(String value) {
+            addCriterion("sex >=", value, "sex");
+            return (Criteria) this;
+        }
+
+        public Criteria andSexLessThan(String value) {
+            addCriterion("sex <", value, "sex");
+            return (Criteria) this;
+        }
+
+        public Criteria andSexLessThanOrEqualTo(String value) {
+            addCriterion("sex <=", value, "sex");
+            return (Criteria) this;
+        }
+
+        public Criteria andSexLike(String value) {
+            addCriterion("sex like", value, "sex");
+            return (Criteria) this;
+        }
+
+        public Criteria andSexNotLike(String value) {
+            addCriterion("sex not like", value, "sex");
+            return (Criteria) this;
+        }
+
+        public Criteria andSexIn(List<String> values) {
+            addCriterion("sex in", values, "sex");
+            return (Criteria) this;
+        }
+
+        public Criteria andSexNotIn(List<String> values) {
+            addCriterion("sex not in", values, "sex");
+            return (Criteria) this;
+        }
+
+        public Criteria andSexBetween(String value1, String value2) {
+            addCriterion("sex between", value1, value2, "sex");
+            return (Criteria) this;
+        }
+
+        public Criteria andSexNotBetween(String value1, String value2) {
+            addCriterion("sex not between", value1, value2, "sex");
             return (Criteria) this;
         }
     }

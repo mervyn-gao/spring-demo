@@ -10,7 +10,7 @@ import java.util.List;
 
 public class DateConverter implements Converter<String, Date> {
 
-    private static final List<String> formarts = new ArrayList<String>(4);
+    private static final List<String> formarts = new ArrayList<>(4);
 
     static {
         formarts.add("yyyy-MM");
@@ -51,7 +51,7 @@ public class DateConverter implements Converter<String, Date> {
         Date date = null;
         try {
             DateFormat dateFormat = new SimpleDateFormat(format);
-            date = (Date) dateFormat.parse(dateStr);
+            date = dateFormat.parse(dateStr);
         } catch (Exception e) {
             e.printStackTrace();
         }

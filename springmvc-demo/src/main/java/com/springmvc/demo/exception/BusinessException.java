@@ -1,36 +1,36 @@
 package com.springmvc.demo.exception;
 
-import com.springmvc.demo.vo.BusinessStatus;
+import com.springmvc.demo.vo.base.ResultCode;
 
 /**
  * Created by mengran.gao on 2017/7/7.
  */
 public class BusinessException extends RuntimeException {
 
-    private BusinessStatus businessStatus;
+    private ResultCode resultCode;
 
     public BusinessException() {
     }
 
-    public BusinessException(BusinessStatus businessStatus) {
-        super(businessStatus.getMessage());
-        this.businessStatus = businessStatus;
+    public BusinessException(ResultCode resultCode) {
+        super(resultCode.getMessage());
+        this.resultCode = resultCode;
     }
 
-    public BusinessException(BusinessStatus businessStatus, Throwable cause) {
-        super(businessStatus.getMessage(), cause);
-        this.businessStatus = businessStatus;
+    public BusinessException(ResultCode resultCode, Throwable cause) {
+        super(resultCode.getMessage(), cause);
+        this.resultCode = resultCode;
     }
 
     public BusinessException(Throwable cause) {
         super(cause);
     }
 
-    public BusinessStatus getBusinessStatus() {
-        return businessStatus;
+    public ResultCode getResultCode() {
+        return resultCode;
     }
 
-    public void setBusinessStatus(BusinessStatus businessStatus) {
-        this.businessStatus = businessStatus;
+    public void setResultCode(ResultCode resultCode) {
+        this.resultCode = resultCode;
     }
 }

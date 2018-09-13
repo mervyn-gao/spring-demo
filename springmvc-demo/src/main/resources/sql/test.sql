@@ -247,3 +247,14 @@ values
 insert into salgrade
 values
 	(5, 3001, 9999);
+
+CREATE TABLE `city` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `state` varchar(255) DEFAULT NULL,
+  `sal` decimal(8,2) DEFAULT '0.00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+

@@ -1,12 +1,17 @@
 package com.springmvc.demo.model;
 
-public class City extends Base {
+import java.math.BigDecimal;
+
+public class City {
     private Long id;
 
     private String name;
-    private String sex;
 
     private String state;
+
+    private BigDecimal sal;
+
+    private String sex;
 
     public Long getId() {
         return id;
@@ -21,7 +26,7 @@ public class City extends Base {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name == null ? null : name.trim();
     }
 
     public String getState() {
@@ -29,7 +34,15 @@ public class City extends Base {
     }
 
     public void setState(String state) {
-        this.state = state;
+        this.state = state == null ? null : state.trim();
+    }
+
+    public BigDecimal getSal() {
+        return sal;
+    }
+
+    public void setSal(BigDecimal sal) {
+        this.sal = sal;
     }
 
     public String getSex() {
@@ -37,6 +50,6 @@ public class City extends Base {
     }
 
     public void setSex(String sex) {
-        this.sex = sex;
+        this.sex = sex == null ? null : sex.trim();
     }
 }

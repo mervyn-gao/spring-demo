@@ -4,6 +4,7 @@ import com.springmvc.demo.model.User;
 import com.springmvc.demo.service.UserService;
 import com.springmvc.demo.util.excel.poi.ExcelUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.InputStream;
 import java.util.LinkedHashMap;
@@ -24,5 +25,10 @@ public class UserServiceImpl implements UserService {
         fieldMap.put("birthday", "出生日期");
         List<User> users = ExcelUtils.excelToList(in, 0, User.class, fieldMap);
         System.out.println(users);
+    }
+
+    @Override @Transactional
+    public void edit(User user) {
+
     }
 }

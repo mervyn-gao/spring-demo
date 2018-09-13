@@ -45,6 +45,10 @@
             <artifactId>spring-tx</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+        </dependency>
+        <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
         </dependency>
@@ -125,27 +129,12 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <scope>provided</scope>
+            <!--<scope>provided</scope>-->
         </dependency>
         <dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
         </dependency>
-        <dependency>
-            <groupId>javax.el</groupId>
-            <artifactId>javax.el-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.web</groupId>
-            <artifactId>javax.el</artifactId>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/jexcelapi/jxl -->
-        <!--<dependency>
-            <groupId>jexcelapi</groupId>
-            <artifactId>jxl</artifactId>
-            <version>2.4.2</version>
-        </dependency>-->
-        <!-- https://mvnrepository.com/artifact/net.sourceforge.jexcelapi/jxl -->
         <dependency>
             <groupId>net.sourceforge.jexcelapi</groupId>
             <artifactId>jxl</artifactId>
@@ -168,6 +157,30 @@
             <artifactId>poi-ooxml-schemas</artifactId>
             <version>${poi.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.baidu.disconf</groupId>
+            <artifactId>disconf-client</artifactId>
+            <version>2.6.36</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.chinaredstar.demeter</groupId>
+            <artifactId>demeter-web</artifactId>
+            <version>1.0.5-SNAPSHOT</version>
+        </dependency>
+
+        <!--<dependency>
+            <groupId>com.chinaredstar</groupId>
+            <artifactId>opas-payment-api</artifactId>
+            <version>2.2.2.SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.chinaredstar</groupId>
+            <artifactId>p-tool-im-api</artifactId>
+            <version>1.3.1.RELEASE</version>
+        </dependency>-->
     </dependencies>
 
     <build>
@@ -187,8 +200,8 @@
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <configuration>
-                    <path>/springmvc-demo</path>
-                    <port>8881</port>
+                    <path>/spingmvc-demo</path>
+                    <port>8080</port>
                     <uriEncoding>UTF-8</uriEncoding>
                     <server>tomcat7</server>
                 </configuration>

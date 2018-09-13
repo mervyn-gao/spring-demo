@@ -5,9 +5,42 @@
     <title>test</title>
 </head>
 <body>
-
+<button onclick="window.print();">打印</button>
+fdsadfsadaf<br>
+dsafsasafsfsaf
 <script type="text/javascript">
-    var a = true, b = 'true', c = 1, d = "1", e = "";
+    window.addEventListener('beforeprint', ()=> {
+        document.body.innerHTML = '正在打印...';
+    });
+    window.addEventListener('afterprint', ()=> {
+        document.body.innerHTML = '打印完成...';
+    });
+    /*(function() {
+        var beforePrint = function() {
+            console.log('Functionality to run before printing.');
+        };
+        var afterPrint = function() {
+            console.log('Functionality to run after printing');
+        };
+
+        if (window.matchMedia) {
+            var mediaQueryList = window.matchMedia('print');
+            mediaQueryList.addListener(function(mql) {
+                if (mql.matches) {
+                    beforePrint();
+                } else {
+                    afterPrint();
+                }
+            });
+        }
+
+        window.onbeforeprint = beforePrint;
+        window.onafterprint = afterPrint;
+    }());*/
+
+    /*window.onbeforeprint = beforePrint;
+    window.onafterprint = afterPrint;*/
+    /*var a = true, b = 'true', c = 1, d = "1", e = "";
     console.log(a == b);
     console.log(c == d);
     if (e) {
@@ -27,7 +60,7 @@
         alert(t);
     }
 
-    test(test1, 11, 22);
+    test(test1, 11, 22);*/
 </script>
 </body>
 </html>

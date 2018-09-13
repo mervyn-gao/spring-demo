@@ -8,12 +8,12 @@ import java.lang.annotation.*;
  * Created by mengran.gao on 2017/8/8.
  */
 @Documented
-@Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
+@Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = IDCardValidator.class)
 public @interface IDCard {
 
-    String message() default "{com.springmvc.demo.validate.IDCard.message}";
+    String message() default "身份证号不合法";
 
     Class<?>[] groups() default {};
 

@@ -1,5 +1,7 @@
 package com.springmvc.demo.service;
 
+import com.springmvc.demo.model.User;
+
 import java.io.InputStream;
 
 /**
@@ -8,4 +10,6 @@ import java.io.InputStream;
 public interface UserService {
 
     void importWorkers(InputStream inputStream);
+
+    void edit(User user);
 }
